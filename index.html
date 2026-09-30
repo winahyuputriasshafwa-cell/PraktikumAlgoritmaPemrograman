@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Kependudukan Kota Magelang</title>
+    <style>
+        /* Reset & Base Style */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f4f8;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .header-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
+        }
+        header h1 {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        header h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: #0f2537;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: #e0e6ed;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: #2a5298;
+            color: #ffffff;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Cards & Section Containers */
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .section-title {
+            color: #1e3c72;
+            font-size: 1.3rem;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Profile & Image */
+        .profile-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        .profile-text {
+            flex: 1 1 400px;
+            text-align: justify;
+        }
+        .profile-img-box {
+            flex: 1 1 350px;
+            text-align: center;
+        }
+        .profile-img-box img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .img-caption {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        /* Stats Dashboard Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-card {
+            background: #f8fafc;
+            border-left: 5px solid #2a5298;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-card.blue { border-left-color: #2980b9; }
+        .stat-card.pink { border-left-color: #e84393; }
+        .stat-card.green { border-left-color: #27ae60; }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 5px 0;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+
+        /* Tables Styling */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #ffffff;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e1e8ed;
+            font-size: 0.95rem;
+        }
+        th {
+            background-color: #2a5298;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-bold { font-weight: bold; }
+        .row-total {
+            background-color: #eaeded !important;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e3c72;
+            color: #ffffff;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+        footer p {
+            opacity: 0.85;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.4rem; }
+            nav { flex-direction: column; align-items: center; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Website -->
+    <header>
+        <img src="logo-kota-magelang.png" alt="Logo Kota Magelang" class="header-logo">
+        <h1>SISTEM INFORMASI STATISTIK KEPENDUDUKAN</h1>
+        <h2>KOTA MAGELANG</h2>
+    </header>
+
+    <!-- Navigasi -->
+    <nav>
+        <a href="#profil">Profil Kota</a>
+        <a href="#ringkasan">Ringkasan Statistik</a>
+        <a href="#kecamatan">Data Kecamatan</a>
+        <a href="#kelompok-umur">Kelompok Umur (2025)</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- Profil Kota & Gambar -->
+        <section id="profil" class="card">
+            <h3 class="section-title">Profil Singkat Kota Magelang</h3>
+            <div class="profile-container">
+                <div class="profile-text">
+                    <p>
+                        Kota Magelang merupakan salah satu kota di Provinsi Jawa Tengah yang terletak di tengah Kabupaten Magelang. Kota Magelang memiliki luas wilayah 18,56 km² dan secara administratif terbagi menjadi 3 kecamatan dan 17 kelurahan.
+                    </p>
+                    <br>
+                    <p><b>Batas Wilayah Topografis:</b></p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li><b>Utara:</b> Kecamatan Secang</li>
+                        <li><b>Timur:</b> Sungai Elo & Kecamatan Tegalrejo</li>
+                        <li><b>Selatan:</b> Kecamatan Mertoyudan</li>
+                        <li><b>Barat:</b> Sungai Progo & Kecamatan Bandongan</li>
+                    </ul>
+                </div>
+                <div class="profile-img-box">
+                    <img src="alun-alun-magelang.jpg" alt="Alun-alun Kota Magelang">
+                    <div class="img-caption">Ikon Kota: Alun-alun Kota Magelang</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ringkasan Statistik -->
+        <section id="ringkasan" class="card">
+            <h3 class="section-title">🗺️ Ringkasan Indikator Utama</h3>
+            <div class="stats-grid">
+                <div class="stat-card green">
+                    <div class="stat-label">Luas Wilayah</div>
+                    <div class="stat-number">18,56 km²</div>
+                    <small>3 Kec. / 17 Kel.</small>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Penduduk (2025)</div>
+                    <div class="stat-number">129.043</div>
+                    <small>Jiwa</small>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-label">Penduduk Laki-Laki</div>
+                    <div class="stat-number">63.823</div>
+                    <small>Jiwa</small>
+                </div>
+                <div class="stat-card pink">
+                    <div class="stat-label">Penduduk Perempuan</div>
+                    <div class="stat-number">65.220</div>
+                    <small>Jiwa</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Kecamatan -->
+        <section id="kecamatan" class="card">
+            <h3 class="section-title">📍 Data Penduduk per Kecamatan</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center">No.</th>
+                            <th>Kecamatan</th>
+                            <th class="text-center">Luas Wilayah (km²)</th>
+                            <th class="text-right">Laki-Laki (Jiwa)</th>
+                            <th class="text-right">Perempuan (Jiwa)</th>
+                            <th class="text-right">Total Penduduk (Jiwa)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>Magelang Selatan</td>
+                            <td class="text-center">5,67</td>
+                            <td class="text-right">20.800</td>
+                            <td class="text-right">21.400</td>
+                            <td class="text-right font-bold">42.200</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">2</td>
+                            <td>Magelang Tengah</td>
+                            <td class="text-center">5,10</td>
+                            <td class="text-right">23.110</td>
+                            <td class="text-right">23.780</td>
+                            <td class="text-right font-bold">46.890</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">3</td>
+                            <td>Magelang Utara</td>
+                            <td class="text-center">7,79</td>
+                            <td class="text-right">19.913</td>
+                            <td class="text-right">20.040</td>
+                            <td class="text-right font-bold">39.953</td>
+                        </tr>
+                        <tr class="row-total">
+                            <td colspan="2" class="text-center">TOTAL KOTA MAGELANG</td>
+                            <td class="text-center">18,56</td>
+                            <td class="text-right">63.823</td>
+                            <td class="text-right">65.220</td>
+                            <td class="text-right">129.043</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Data Kelompok Umur (File Excel BPS 2025) -->
+        <section id="kelompok-umur" class="card">
+            <h3 class="section-title">📊 Penduduk Menurut Kelompok Umur & Jenis Kelamin (2025)</h3>
+            <p style="font-size:0.88rem; color:#666; margin-bottom: 12px;"><i>Sumber Data: BPS Kota Magelang (Proyeksi 2025)</i></p>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center">Kelompok Umur (Tahun)</th>
+                            <th class="text-right">Laki-Laki (Jiwa)</th>
+                            <th class="text-right">Perempuan (Jiwa)</th>
+                            <th class="text-right">Total (Laki-Laki + Perempuan)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="text-center">0 - 4</td><td class="text-right">3.413</td><td class="text-right">3.156</td><td class="text-right font-bold">6.569</td></tr>
+                        <tr><td class="text-center">5 - 9</td><td class="text-right">4.427</td><td class="text-right">4.160</td><td class="text-right font-bold">8.587</td></tr>
+                        <tr><td class="text-center">10 - 14</td><td class="text-right">4.752</td><td class="text-right">4.572</td><td class="text-right font-bold">9.324</td></tr>
+                        <tr><td class="text-center">15 - 19</td><td class="text-right">5.160</td><td class="text-right">4.920</td><td class="text-right font-bold">10.080</td></tr>
+                        <tr><td class="text-center">20 - 24</td><td class="text-right">5.165</td><td class="text-right">4.829</td><td class="text-right font-bold">9.994</td></tr>
+                        <tr><td class="text-center">25 - 29</td><td class="text-right">5.146</td><td class="text-right">4.827</td><td class="text-right font-bold">9.973</td></tr>
+                        <tr><td class="text-center">30 - 34</td><td class="text-right">4.824</td><td class="text-right">4.607</td><td class="text-right font-bold">9.431</td></tr>
+                        <tr><td class="text-center">35 - 39</td><td class="text-right">4.315</td><td class="text-right">4.134</td><td class="text-right font-bold">8.449</td></tr>
+                        <tr><td class="text-center">40 - 44</td><td class="text-right">4.749</td><td class="text-right">4.792</td><td class="text-right font-bold">9.541</td></tr>
+                        <tr><td class="text-center">45 - 49</td><td class="text-right">4.712</td><td class="text-right">4.609</td><td class="text-right font-bold">9.321</td></tr>
+                        <tr><td class="text-center">50 - 54</td><td class="text-right">4.205</td><td class="text-right">4.490</td><td class="text-right font-bold">8.695</td></tr>
+                        <tr><td class="text-center">55 - 59</td><td class="text-right">3.900</td><td class="text-right">4.424</td><td class="text-right font-bold">8.324</td></tr>
+                        <tr><td class="text-center">60 - 64</td><td class="text-right">3.207</td><td class="text-right">4.084</td><td class="text-right font-bold">7.291</td></tr>
+                        <tr><td class="text-center">65 - 69</td><td class="text-right">2.618</td><td class="text-right">3.191</td><td class="text-right font-bold">5.809</td></tr>
+                        <tr><td class="text-center">70 - 74</td><td class="text-right">1.805</td><td class="text-right">2.078</td><td class="text-right font-bold">3.883</td></tr>
+                        <tr><td class="text-center">75+</td><td class="text-right">1.425</td><td class="text-right">2.347</td><td class="text-right font-bold">3.772</td></tr>
+                        <tr class="row-total">
+                            <td class="text-center">JUMLAH / TOTAL</td>
+                            <td class="text-right">63.823</td>
+                            <td class="text-right">65.220</td>
+                            <td class="text-right">129.043</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Pemerintah Kota Magelang — Dinas Kependudukan dan Pencatatan Sipil</p>
+        <p><small>&copy; 2026 Web Kependudukan Kota Magelang | Hosted on GitHub Pages</small></p>
+    </footer>
+
+</body>
+</html>
