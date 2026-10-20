@@ -4,316 +4,470 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Informasi Kependudukan Kota Magelang</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset & Base Style */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #0d9488;
+            --bg-main: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.12);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
-            background-color: #f0f4f8;
-            color: #333333;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
             line-height: 1.6;
         }
 
-        /* Header & Navigation */
+        /* Header Modern */
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e3a8a 100%);
             color: #ffffff;
-            padding: 30px 20px;
+            padding: 45px 20px 35px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-        .header-logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 15px;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
-        }
-        header h1 {
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-        header h2 {
-            font-size: 1.2rem;
-            font-weight: 400;
-            opacity: 0.9;
+            position: relative;
+            overflow: hidden;
         }
 
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header-logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .header-logo:hover {
+            transform: scale(1.05);
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        /* Navigasi Floating */
         nav {
-            background-color: #0f2537;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 10px;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            padding: 12px;
+            gap: 10px;
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
+
         nav a {
-            color: #e0e6ed;
+            color: #94a3b8;
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding: 6px 12px;
-            border-radius: 4px;
-            transition: background 0.3s;
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.25s ease;
         }
+
         nav a:hover {
-            background-color: #2a5298;
             color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
         }
 
         /* Main Container */
-        .container {
-            max-width: 1100px;
-            margin: 30px auto;
+        .wrapper {
+            max-width: 1000px;
+            margin: 35px auto;
             padding: 0 20px;
         }
 
-        /* Cards & Section Containers */
+        /* Cards Style */
         .card {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 25px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-        .section-title {
-            color: #1e3c72;
-            font-size: 1.3rem;
-            border-bottom: 3px solid #2a5298;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
 
-        /* Profile & Image */
-        .profile-container {
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
             align-items: center;
-        }
-        .profile-text {
-            flex: 1 1 400px;
-            text-align: justify;
-        }
-        .profile-img-box {
-            flex: 1 1 350px;
-            text-align: center;
-        }
-        .profile-img-box img {
-            width: 100%;
-            max-width: 450px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .img-caption {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 6px;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f1f5f9;
         }
 
-        /* Stats Dashboard Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary);
         }
-        .stat-card {
-            background: #f8fafc;
-            border-left: 5px solid #2a5298;
-            padding: 15px;
-            border-radius: 6px;
-            text-align: center;
-        }
-        .stat-card.blue { border-left-color: #2980b9; }
-        .stat-card.pink { border-left-color: #e84393; }
-        .stat-card.green { border-left-color: #27ae60; }
 
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 5px 0;
-        }
-        .stat-label {
-            font-size: 0.85rem;
-            color: #7f8c8d;
+        .badge {
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
             text-transform: uppercase;
         }
 
-        /* Tables Styling */
+        /* Profil Section Layout */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        .profile-img-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-img-container:hover img {
+            transform: scale(1.04);
+        }
+
+        .img-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(0deg, rgba(15,23,42,0.85) 0%, transparent 100%);
+            color: #ffffff;
+            padding: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        ul.list-custom {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        ul.list-custom li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 6px;
+            font-size: 0.92rem;
+        }
+
+        ul.list-custom li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Dashboard Grid Cards (Interaktif) */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card:hover::before {
+            width: 8px;
+        }
+
+        .stat-card.accent::before { background: var(--accent); }
+        .stat-card.dark::before { background: var(--secondary); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin: 6px 0 2px;
+        }
+
+        .stat-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Tabel Design */
         .table-responsive {
             overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid var(--border);
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
-            background: #ffffff;
+            font-size: 0.9rem;
+            background: var(--surface);
         }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e1e8ed;
-            font-size: 0.95rem;
-        }
+
         th {
-            background-color: #2a5298;
-            color: #ffffff;
-            font-weight: 600;
+            background-color: #f1f5f9;
+            color: var(--secondary);
+            font-weight: 700;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--border);
         }
-        tr:nth-child(even) {
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s ease;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
             background-color: #f8fafc;
         }
-        tr:hover {
-            background-color: #f1f5f9;
+
+        .row-total {
+            background-color: #f1f5f9 !important;
+            font-weight: 700;
+            color: var(--secondary);
         }
+
         .text-center { text-align: center; }
         .text-right { text-align: right; }
-        .font-bold { font-weight: bold; }
-        .row-total {
-            background-color: #eaeded !important;
-            font-weight: bold;
-        }
 
         /* Footer */
         footer {
-            background-color: #1e3c72;
-            color: #ffffff;
+            background: var(--secondary);
+            color: #94a3b8;
             text-align: center;
-            padding: 25px 20px;
-            margin-top: 40px;
-            font-size: 0.9rem;
-        }
-        footer p {
-            opacity: 0.85;
-            margin-bottom: 5px;
+            padding: 30px 20px;
+            margin-top: 50px;
+            font-size: 0.85rem;
         }
 
-        @media (max-width: 600px) {
+        footer p strong {
+            color: #ffffff;
+        }
+
+        @media (max-width: 640px) {
             header h1 { font-size: 1.4rem; }
-            nav { flex-direction: column; align-items: center; gap: 8px; }
+            nav { flex-wrap: wrap; }
+            .card { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Website -->
     <header>
         <img src="logo-kota-magelang.png" alt="Logo Kota Magelang" class="header-logo">
-        <h1>SISTEM INFORMASI STATISTIK KEPENDUDUKAN</h1>
-        <h2>KOTA MAGELANG</h2>
+        <h1>SISTEM INFORMASI KEPENDUDUKAN</h1>
+        <p>Pemerintah Kota Magelang</p>
     </header>
 
-    <!-- Navigasi -->
     <nav>
-        <a href="#profil">Profil Kota</a>
-        <a href="#ringkasan">Ringkasan Statistik</a>
-        <a href="#kecamatan">Data Kecamatan</a>
-        <a href="#kelompok-umur">Kelompok Umur (2025)</a>
+        <a href="#profil">Profil</a>
+        <a href="#ringkasan">Indikator</a>
+        <a href="#kecamatan">Kecamatan</a>
+        <a href="#kelompok-umur">Kelompok Umur</a>
     </nav>
 
-    <div class="container">
+    <div class="wrapper">
 
-        <!-- Profil Kota & Gambar -->
+        <!-- Profil -->
         <section id="profil" class="card">
-            <h3 class="section-title">Profil Singkat Kota Magelang</h3>
-            <div class="profile-container">
-                <div class="profile-text">
+            <div class="card-header">
+                <h2>Profil Wilayah</h2>
+                <span class="badge">Gambaran Umum</span>
+            </div>
+            <div class="profile-grid">
+                <div>
                     <p>
-                        Kota Magelang merupakan salah satu kota di Provinsi Jawa Tengah yang terletak di tengah Kabupaten Magelang. Kota Magelang memiliki luas wilayah 18,56 km² dan secara administratif terbagi menjadi 3 kecamatan dan 17 kelurahan.
+                        Kota Magelang merupakan kota otonom yang terletak di tengah wilayah Kabupaten Magelang, Jawa Tengah. Luas wilayah terdaftar mencapai <strong>18,56 km²</strong> yang terbagi secara administratif ke dalam 3 kecamatan dan 17 kelurahan.
                     </p>
-                    <br>
-                    <p><b>Batas Wilayah Topografis:</b></p>
-                    <ul style="margin-left: 20px; margin-top: 5px;">
-                        <li><b>Utara:</b> Kecamatan Secang</li>
-                        <li><b>Timur:</b> Sungai Elo & Kecamatan Tegalrejo</li>
-                        <li><b>Selatan:</b> Kecamatan Mertoyudan</li>
-                        <li><b>Barat:</b> Sungai Progo & Kecamatan Bandongan</li>
+                    <p style="margin-top: 14px; font-weight: 600; color: var(--secondary);">Batas Wilayah Administrative:</p>
+                    <ul class="list-custom">
+                        <li><strong>Utara:</strong> Kecamatan Secang</li>
+                        <li><strong>Timur:</strong> Sungai Elo & Kecamatan Tegalrejo</li>
+                        <li><strong>Selatan:</strong> Kecamatan Mertoyudan</li>
+                        <li><strong>Barat:</strong> Sungai Progo & Kecamatan Bandongan</li>
                     </ul>
                 </div>
-                <div class="profile-img-box">
-                    <img src="alun-alun-magelang.jpg" alt="Alun-alun Kota Magelang">
-                    <div class="img-caption">Ikon Kota: Alun-alun Kota Magelang</div>
+                <div class="profile-img-container">
+                    <img src="alun-alun-magelang.jpg" alt="Alun-Alun Kota Magelang">
+                    <div class="img-caption">Alun-Alun Kota Magelang</div>
                 </div>
             </div>
         </section>
 
         <!-- Ringkasan Statistik -->
         <section id="ringkasan" class="card">
-            <h3 class="section-title">🗺️ Ringkasan Indikator Utama</h3>
+            <div class="card-header">
+                <h2>Indikator Utama</h2>
+                <span class="badge">Proyeksi 2025</span>
+            </div>
             <div class="stats-grid">
-                <div class="stat-card green">
+                <div class="stat-card dark">
                     <div class="stat-label">Luas Wilayah</div>
-                    <div class="stat-number">18,56 km²</div>
-                    <small>3 Kec. / 17 Kel.</small>
+                    <div class="stat-value">18,56</div>
+                    <div class="stat-desc">Kilometer Persegi (km²)</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Total Penduduk (2025)</div>
-                    <div class="stat-number">129.043</div>
-                    <small>Jiwa</small>
+                    <div class="stat-label">Total Penduduk</div>
+                    <div class="stat-value">129.043</div>
+                    <div class="stat-desc">Jiwa (Laki-laki + Perempuan)</div>
                 </div>
-                <div class="stat-card blue">
+                <div class="stat-card accent">
                     <div class="stat-label">Penduduk Laki-Laki</div>
-                    <div class="stat-number">63.823</div>
-                    <small>Jiwa</small>
+                    <div class="stat-value">63.823</div>
+                    <div class="stat-desc">Jiwa (49.46%)</div>
                 </div>
-                <div class="stat-card pink">
+                <div class="stat-card">
                     <div class="stat-label">Penduduk Perempuan</div>
-                    <div class="stat-number">65.220</div>
-                    <small>Jiwa</small>
+                    <div class="stat-value">65.220</div>
+                    <div class="stat-desc">Jiwa (50.54%)</div>
                 </div>
             </div>
         </section>
 
         <!-- Data Kecamatan -->
         <section id="kecamatan" class="card">
-            <h3 class="section-title">📍 Data Penduduk per Kecamatan</h3>
+            <div class="card-header">
+                <h2>Distribusi Penduduk per Kecamatan</h2>
+            </div>
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
-                            <th class="text-center">No.</th>
+                            <th class="text-center" style="width: 60px;">No</th>
                             <th>Kecamatan</th>
-                            <th class="text-center">Luas Wilayah (km²)</th>
-                            <th class="text-right">Laki-Laki (Jiwa)</th>
-                            <th class="text-right">Perempuan (Jiwa)</th>
-                            <th class="text-right">Total Penduduk (Jiwa)</th>
+                            <th class="text-center">Luas (km²)</th>
+                            <th class="text-right">Laki-Laki</th>
+                            <th class="text-right">Perempuan</th>
+                            <th class="text-right">Total Penduduk</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td class="text-center">1</td>
-                            <td>Magelang Selatan</td>
+                            <td><strong>Magelang Selatan</strong></td>
                             <td class="text-center">5,67</td>
                             <td class="text-right">20.800</td>
                             <td class="text-right">21.400</td>
-                            <td class="text-right font-bold">42.200</td>
+                            <td class="text-right"><strong>42.200</strong></td>
                         </tr>
                         <tr>
                             <td class="text-center">2</td>
-                            <td>Magelang Tengah</td>
+                            <td><strong>Magelang Tengah</strong></td>
                             <td class="text-center">5,10</td>
                             <td class="text-right">23.110</td>
                             <td class="text-right">23.780</td>
-                            <td class="text-right font-bold">46.890</td>
+                            <td class="text-right"><strong>46.890</strong></td>
                         </tr>
                         <tr>
                             <td class="text-center">3</td>
-                            <td>Magelang Utara</td>
+                            <td><strong>Magelang Utara</strong></td>
                             <td class="text-center">7,79</td>
                             <td class="text-right">19.913</td>
                             <td class="text-right">20.040</td>
-                            <td class="text-right font-bold">39.953</td>
+                            <td class="text-right"><strong>39.953</strong></td>
                         </tr>
                         <tr class="row-total">
-                            <td colspan="2" class="text-center">TOTAL KOTA MAGELANG</td>
+                            <td colspan="2" class="text-center">KOTA MAGELANG</td>
                             <td class="text-center">18,56</td>
                             <td class="text-right">63.823</td>
                             <td class="text-right">65.220</td>
@@ -324,40 +478,41 @@
             </div>
         </section>
 
-        <!-- Data Kelompok Umur (File Excel BPS 2025) -->
+        <!-- Data Kelompok Umur -->
         <section id="kelompok-umur" class="card">
-            <h3 class="section-title">📊 Penduduk Menurut Kelompok Umur & Jenis Kelamin (2025)</h3>
-            <p style="font-size:0.88rem; color:#666; margin-bottom: 12px;"><i>Sumber Data: BPS Kota Magelang (Proyeksi 2025)</i></p>
-            
+            <div class="card-header">
+                <h2>Demografi Berdasarkan Kelompok Umur</h2>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;"><i>Sumber Data: Proyeksi Penduduk BPS Kota Magelang 2025</i>[cite: 1]</p>
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
                             <th class="text-center">Kelompok Umur (Tahun)</th>
-                            <th class="text-right">Laki-Laki (Jiwa)</th>
-                            <th class="text-right">Perempuan (Jiwa)</th>
-                            <th class="text-right">Total (Laki-Laki + Perempuan)</th>
+                            <th class="text-right">Laki-Laki</th>
+                            <th class="text-right">Perempuan</th>
+                            <th class="text-right">Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td class="text-center">0 - 4</td><td class="text-right">3.413</td><td class="text-right">3.156</td><td class="text-right font-bold">6.569</td></tr>
-                        <tr><td class="text-center">5 - 9</td><td class="text-right">4.427</td><td class="text-right">4.160</td><td class="text-right font-bold">8.587</td></tr>
-                        <tr><td class="text-center">10 - 14</td><td class="text-right">4.752</td><td class="text-right">4.572</td><td class="text-right font-bold">9.324</td></tr>
-                        <tr><td class="text-center">15 - 19</td><td class="text-right">5.160</td><td class="text-right">4.920</td><td class="text-right font-bold">10.080</td></tr>
-                        <tr><td class="text-center">20 - 24</td><td class="text-right">5.165</td><td class="text-right">4.829</td><td class="text-right font-bold">9.994</td></tr>
-                        <tr><td class="text-center">25 - 29</td><td class="text-right">5.146</td><td class="text-right">4.827</td><td class="text-right font-bold">9.973</td></tr>
-                        <tr><td class="text-center">30 - 34</td><td class="text-right">4.824</td><td class="text-right">4.607</td><td class="text-right font-bold">9.431</td></tr>
-                        <tr><td class="text-center">35 - 39</td><td class="text-right">4.315</td><td class="text-right">4.134</td><td class="text-right font-bold">8.449</td></tr>
-                        <tr><td class="text-center">40 - 44</td><td class="text-right">4.749</td><td class="text-right">4.792</td><td class="text-right font-bold">9.541</td></tr>
-                        <tr><td class="text-center">45 - 49</td><td class="text-right">4.712</td><td class="text-right">4.609</td><td class="text-right font-bold">9.321</td></tr>
-                        <tr><td class="text-center">50 - 54</td><td class="text-right">4.205</td><td class="text-right">4.490</td><td class="text-right font-bold">8.695</td></tr>
-                        <tr><td class="text-center">55 - 59</td><td class="text-right">3.900</td><td class="text-right">4.424</td><td class="text-right font-bold">8.324</td></tr>
-                        <tr><td class="text-center">60 - 64</td><td class="text-right">3.207</td><td class="text-right">4.084</td><td class="text-right font-bold">7.291</td></tr>
-                        <tr><td class="text-center">65 - 69</td><td class="text-right">2.618</td><td class="text-right">3.191</td><td class="text-right font-bold">5.809</td></tr>
-                        <tr><td class="text-center">70 - 74</td><td class="text-right">1.805</td><td class="text-right">2.078</td><td class="text-right font-bold">3.883</td></tr>
-                        <tr><td class="text-center">75+</td><td class="text-right">1.425</td><td class="text-right">2.347</td><td class="text-right font-bold">3.772</td></tr>
+                        <tr><td class="text-center">0 - 4</td><td class="text-right">3.413</td><td class="text-right">3.156</td><td class="text-right"><strong>6.569</strong></td></tr>
+                        <tr><td class="text-center">5 - 9</td><td class="text-right">4.427</td><td class="text-right">4.160</td><td class="text-right"><strong>8.587</strong></td></tr>
+                        <tr><td class="text-center">10 - 14</td><td class="text-right">4.752</td><td class="text-right">4.572</td><td class="text-right"><strong>9.324</strong></td></tr>
+                        <tr><td class="text-center">15 - 19</td><td class="text-right">5.160</td><td class="text-right">4.920</td><td class="text-right"><strong>10.080</strong></td></tr>
+                        <tr><td class="text-center">20 - 24</td><td class="text-right">5.165</td><td class="text-right">4.829</td><td class="text-right"><strong>9.994</strong></td></tr>
+                        <tr><td class="text-center">25 - 29</td><td class="text-right">5.146</td><td class="text-right">4.827</td><td class="text-right"><strong>9.973</strong></td></tr>
+                        <tr><td class="text-center">30 - 34</td><td class="text-right">4.824</td><td class="text-right">4.607</td><td class="text-right"><strong>9.431</strong></td></tr>
+                        <tr><td class="text-center">35 - 39</td><td class="text-right">4.315</td><td class="text-right">4.134</td><td class="text-right"><strong>8.449</strong></td></tr>
+                        <tr><td class="text-center">40 - 44</td><td class="text-right">4.749</td><td class="text-right">4.792</td><td class="text-right"><strong>9.541</strong></td></tr>
+                        <tr><td class="text-center">45 - 49</td><td class="text-right">4.712</td><td class="text-right">4.609</td><td class="text-right"><strong>9.321</strong></td></tr>
+                        <tr><td class="text-center">50 - 54</td><td class="text-right">4.205</td><td class="text-right">4.490</td><td class="text-right"><strong>8.695</strong></td></tr>
+                        <tr><td class="text-center">55 - 59</td><td class="text-right">3.900</td><td class="text-right">4.424</td><td class="text-right"><strong>8.324</strong></td></tr>
+                        <tr><td class="text-center">60 - 64</td><td class="text-right">3.207</td><td class="text-right">4.084</td><td class="text-right"><strong>7.291</strong></td></tr>
+                        <tr><td class="text-center">65 - 69</td><td class="text-right">2.618</td><td class="text-right">3.191</td><td class="text-right"><strong>5.809</strong></td></tr>
+                        <tr><td class="text-center">70 - 74</td><td class="text-right">1.805</td><td class="text-right">2.078</td><td class="text-right"><strong>3.883</strong></td></tr>
+                        <tr><td class="text-center">75+</td><td class="text-right">1.425</td><td class="text-right">2.347</td><td class="text-right"><strong>3.772</strong></td></tr>
                         <tr class="row-total">
-                            <td class="text-center">JUMLAH / TOTAL</td>
+                            <td class="text-center">TOTAL PENDUDUK</td>
                             <td class="text-right">63.823</td>
                             <td class="text-right">65.220</td>
                             <td class="text-right">129.043</td>
@@ -369,10 +524,9 @@
 
     </div>
 
-    <!-- Footer -->
     <footer>
-        <p>Pemerintah Kota Magelang — Dinas Kependudukan dan Pencatatan Sipil</p>
-        <p><small>&copy; 2026 Web Kependudukan Kota Magelang | Hosted on GitHub Pages</small></p>
+        <p><strong>Dinas Kependudukan dan Pencatatan Sipil Kota Magelang</strong></p>
+        <p style="margin-top: 4px;"><small>&copy; 2026 Web Statistik Kependudukan Kota Magelang</small></p>
     </footer>
 
 </body>
